@@ -58,26 +58,50 @@ public class FilmArkiv implements FilmarkivADT {
 
 	@Override
 	public Film[] soekTittel(String delstreng) {
-		// TODO Auto-generated method stub
-		return null;
+		Film [] result = new Film[antallFilmer];
+		int antallResult = 0;
+		
+		for (int i = 0; i < antallFilmer;i++) {
+			if (filmTabell[i].getTittel().toLowerCase().contains(delstreng.toLowerCase())) {
+				result[antallResult] = filmTabell[i];
+				antallResult++;
+			}
+		}
+		return Arrays.copyOf(result, antallResult);
 	}
 
 	@Override
 	public Film[] soekProdusent(String delstreng) {
-		// TODO Auto-generated method stub
-		return null;
+		Film[] result = new Film[antallFilmer];
+		int antallResultater = 0;
+		
+		for (int i = 0; i < antallFilmer;i++) {
+			if (filmTabell[i].getProdusent().toLowerCase().contains(delstreng.toLowerCase())) {
+				result[antallResultater] = filmTabell[i];
+				antallResultater++;
+			}
+			
+		}
+		return Arrays.copyOf(result,antallResultater);
 	}
 
 	@Override
+	// Finner antall filmer med oppgitt sjanger, returnerer antall filmer med spesifikk sjanger
 	public int antall(Sjanger sjanger) {
-		// TODO Auto-generated method stub
-		return 0;
+		int antallSjanger = 0;
+		
+		for (int i = 0; i < antallFilmer;i++) {
+			if (filmTabell[i].getSjanger() == sjanger) {
+				antallSjanger ++;
+			}
+		}
+		return antallSjanger;
 	}
 
 	@Override
+	// Returnerer antall filmer i arkivet. 
 	public int antall() {
-		// TODO Auto-generated method stub
-		return 0;
+		return antallFilmer;
 	}
 	
 
