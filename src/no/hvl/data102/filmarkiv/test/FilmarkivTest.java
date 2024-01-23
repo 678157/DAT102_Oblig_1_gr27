@@ -41,6 +41,92 @@ public class FilmarkivTest {
 		assertEquals(3,filmarkiv.antall(),"Skal være 3 filmer i listen");
 	}
 	
+	@Test
+	public void finnFilmTest() {
+		filmarkiv.leggTilFilm(film1);
+		filmarkiv.leggTilFilm(film2);
+		filmarkiv.leggTilFilm(film3);
+		
+		Film funnetFilm = filmarkiv.finnFilm(1);
+		assertNotNull(funnetFilm, "Film med id 1 skal bli funnet.");
+		assertEquals("Tittel1",funnetFilm.getTittel(),"Funnet film sin tittel skal stemme med tittel.");
+		
+		Film funnetFilm2 = filmarkiv.finnFilm(2);
+		assertNotNull(funnetFilm2, "film med id 2 skal bli funnet");
+		assertEquals("Tittel2",funnetFilm.getTittel(), "Film med id 2 skal ha samsvarende tittel.");
+		
+		Film funnetFilm3 = filmarkiv.finnFilm(3);
+		assertNotNull(funnetFilm3,"Film med id 3 skal bli funnet.");
+		assertEquals(null,funnetFilm.getTittel(),"Film med id 3 skal ha tittel verdi: null");
+		
+		
+	}
+	
+	@Test
+	public void slettFilmTest() {
+		filmarkiv.leggTilFilm(film1);
+		filmarkiv.leggTilFilm(film2);
+		filmarkiv.leggTilFilm(film3);
+		
+		assertTrue(filmarkiv.slettFilm(1), "Skal slette film med id 1");
+		assertEquals(2,	filmarkiv.antall(),"skal returnere at  det er 2 filmer igjen i listen.");
+		assertNull(filmarkiv.finnFilm(1),"Film med id 1 skal ikke lengre eksistere");
+		
+	}
+	
+	@Test
+	public void soekTittelFilmTest() {
+		filmarkiv.leggTilFilm(film1);
+		filmarkiv.leggTilFilm(film2);
+		filmarkiv.leggTilFilm(film3);
+		
+		Film [] resultat = filmarkiv.soekTittel("Tittel1");
+		assertEquals(1,resultat.length,"Skal finne 1 film med tittel 'Tittel1'");
+		
+		Film[] resultat2 = filmarkiv.soekTittel("Tittel2");
+		assertEquals(1,resultat2.length,"Skal finne 1 film med tittel 'tittel2'");
+	}
+	
+	@Test
+	public void soekProdusentTest() {
+		filmarkiv.leggTilFilm(film1);
+		filmarkiv.leggTilFilm(film2);
+		
+		Film[] resultat = filmarkiv.soekProdusent("Produsent1");
+		assertEquals(1,resultat.length,"Skal finne 1 produsent med tilsvarende navn.");
+		
+		Film[] resultat2 = filmarkiv.soekProdusent("Produsent2");
+		assertEquals(1,resultat2.length,"Skal finne 1 produsent med tilsvarende navn.");
+		
+	}
+	
+	@Test
+	public void antallSjangrerTest() {
+		filmarkiv.leggTilFilm(film1);
+		filmarkiv.leggTilFilm(film2);
+		
+		int antallActionFilmer = filmarkiv.antall(Sjanger.ACTION);
+		assertEquals(1,antallActionFilmer,"Skal returnere 1 action film");
+		
+		int antallRomanceFilmer = filmarkiv.antall(Sjanger.COMEDY);
+		assertEquals(0,antallRomanceFilmer,"Skal returnere 0 komedie filmer");
+		
+	}
+	
+	@Test
+	public void antallTest() {
+		assertEquals(0,filmarkiv.antall(),"Skal være 0 filmer i listen");
+		
+		filmarkiv.leggTilFilm(film1);
+		assertEquals(1,filmarkiv.antall(),"Skal være 1 film i listen nå.");
+		
+		filmarkiv.leggTilFilm(film2);
+		filmarkiv.leggTilFilm(film3);
+		assertEquals(3,filmarkiv.antall(),"Skal være 3 filmer i listen nå.");
+		
+		
+	}
+	
 	
 	
 	
