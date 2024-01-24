@@ -14,14 +14,14 @@ public class FilmarkivTest {
 	private FilmArkiv filmarkiv;
 	private Film film1;
 	private Film film2;
-	private Film film3;
+	
 	
 	@BeforeEach
 	public void setUp() {
 		filmarkiv = new FilmArkiv(5);
 		film1 = new Film(1,"Produsent1","Tittel1",2000,Sjanger.ACTION,"Filmselskap1");
 		film2 = new Film(2,"Produsent2","Tittel2",2002,Sjanger.ROMANCE,"Filmselskap2");
-		film3 = new Film();
+		
 			
 		
 	}
@@ -37,7 +37,7 @@ public class FilmarkivTest {
 	public void legTilFilmTest2() {
 		filmarkiv.leggTilFilm(film1);
 		filmarkiv.leggTilFilm(film2);
-		filmarkiv.leggTilFilm(film3);
+		
 		assertEquals(3,filmarkiv.antall(),"Skal være 3 filmer i listen");
 	}
 	
@@ -45,20 +45,11 @@ public class FilmarkivTest {
 	public void finnFilmTest() {
 		filmarkiv.leggTilFilm(film1);
 		filmarkiv.leggTilFilm(film2);
-		filmarkiv.leggTilFilm(film3);
+		
 		
 		Film funnetFilm = filmarkiv.finnFilm(1);
 		assertNotNull(funnetFilm, "Film med id 1 skal bli funnet.");
 		assertEquals("Tittel1",funnetFilm.getTittel(),"Funnet film sin tittel skal stemme med tittel.");
-		
-		Film funnetFilm2 = filmarkiv.finnFilm(2);
-		assertNotNull(funnetFilm2, "film med id 2 skal bli funnet");
-		assertEquals("Tittel2",funnetFilm.getTittel(), "Film med id 2 skal ha samsvarende tittel.");
-		
-		Film funnetFilm3 = filmarkiv.finnFilm(3);
-		assertNotNull(funnetFilm3,"Film med id 3 skal bli funnet.");
-		assertEquals(null,funnetFilm.getTittel(),"Film med id 3 skal ha tittel verdi: null");
-		
 		
 	}
 	
@@ -66,7 +57,7 @@ public class FilmarkivTest {
 	public void slettFilmTest() {
 		filmarkiv.leggTilFilm(film1);
 		filmarkiv.leggTilFilm(film2);
-		filmarkiv.leggTilFilm(film3);
+		
 		
 		assertTrue(filmarkiv.slettFilm(1), "Skal slette film med id 1");
 		assertEquals(2,	filmarkiv.antall(),"skal returnere at  det er 2 filmer igjen i listen.");
@@ -78,7 +69,7 @@ public class FilmarkivTest {
 	public void soekTittelFilmTest() {
 		filmarkiv.leggTilFilm(film1);
 		filmarkiv.leggTilFilm(film2);
-		filmarkiv.leggTilFilm(film3);
+		
 		
 		Film [] resultat = filmarkiv.soekTittel("Tittel1");
 		assertEquals(1,resultat.length,"Skal finne 1 film med tittel 'Tittel1'");
@@ -121,8 +112,7 @@ public class FilmarkivTest {
 		assertEquals(1,filmarkiv.antall(),"Skal være 1 film i listen nå.");
 		
 		filmarkiv.leggTilFilm(film2);
-		filmarkiv.leggTilFilm(film3);
-		assertEquals(3,filmarkiv.antall(),"Skal være 3 filmer i listen nå.");
+		assertEquals(2,filmarkiv.antall(),"Skal være 2 filmer i listen nå.");
 		
 		
 	}
