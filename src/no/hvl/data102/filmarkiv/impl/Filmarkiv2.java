@@ -1,4 +1,6 @@
 package no.hvl.data102.filmarkiv.impl;
+import java.util.Arrays;
+
 import no.hvl.data102.filmarkiv.adt.FilmarkivADT;
 
 public class Filmarkiv2 implements FilmarkivADT {
@@ -61,19 +63,54 @@ public class Filmarkiv2 implements FilmarkivADT {
 	    @Override
 	    public Film[] soekTittel(String delstreng) {
 	        // TODO: Implementer søk etter filmer med gitt delstreng i tittelen
-	        return null;
+	    	
+	        Film[] resultater = new Film[antall];
+	        LinearNode<Film> valgt = start;
+
+	        int i = 0;
+
+	        while (valgt != null && i < resultater.length) {
+	            if (valgt.getData().getTittel().toLowerCase().contains(delstreng.toLowerCase())) {
+	                resultater[i] = valgt.getData();
+	                i++;
+	            }
+	            valgt = valgt.getNeste();
+	        }
+
+	        return Arrays.copyOf(resultater, i);
 	    }
 
 	    @Override
 	    public Film[] soekProdusent(String delstreng) {
 	        // TODO: Implementer søk etter filmer med gitt delstreng i produsent
-	        return null;
+	        Film[] resultater = new Film[antall];
+	        LinearNode<Film> valgt = start;
+
+	        int i = 0;
+
+	        while (valgt != null && i < resultater.length) {
+	            if (valgt.getData().getProdusent().toLowerCase().contains(delstreng.toLowerCase())) {
+	                resultater[i] = valgt.getData();
+	                i++;
+	            }
+	            valgt = valgt.getNeste();
+	        }
+
+	        return Arrays.copyOf(resultater, i);
 	    }
 
 	    @Override
 	    public int antall(Sjanger sjanger) {
 	        // TODO: Implementer telling av filmer med gitt sjanger
-	        return 0;
+	      int antallsjanger = 0;
+	      LinearNode<Film> valgt = start;
+	      while(valgt.getData() != null) {
+	    	  if (sjanger == valgt.getData().getSjanger()) {
+	    		  antallsjanger++;
+	    	  }
+	    	  valgt = valgt.getNeste();
+	      }
+	      return antallsjanger;
 	    }
 
 	    @Override
