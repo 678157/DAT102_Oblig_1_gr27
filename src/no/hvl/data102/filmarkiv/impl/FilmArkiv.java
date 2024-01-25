@@ -38,6 +38,7 @@ public class FilmArkiv implements FilmarkivADT {
 			utvid();
 			
 		}
+
 		filmTabell[antallFilmer] = nyFilm;
 		antallFilmer++;
 		

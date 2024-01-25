@@ -1,6 +1,7 @@
 package no.hvl.data102.filmarkiv.klient;
 
 import no.hvl.data102.filmarkiv.impl.Film;
+//import no.hvl.data102.filmarkiv.impl.FilmArkiv;
 import no.hvl.data102.filmarkiv.impl.Sjanger;
 import no.hvl.data102.filmarkiv.adt.FilmarkivADT;
 
@@ -12,15 +13,16 @@ public class Tekstgrensesnitt {
 
     public Tekstgrensesnitt(){
         this.scanner = new Scanner(System.in);
+
     }
 
     public Film lesFilm(){
 
         System.out.println("Legg til en ny film: ");
 
-        System.out.println("Filmnummer: ");
+        System.out.println("Skriv inn filmnummer: ");
         int filmNummer = scanner.nextInt();
-    
+        scanner.nextLine();
 
         System.out.println("Film produsent: ");
         String filmProdusent = scanner.nextLine();
@@ -30,14 +32,29 @@ public class Tekstgrensesnitt {
 
         System.out.println("Lanseringsår: ");
         int filmLanseringsar = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.println("Velg sjanger: ");
+
         for (Sjanger sjanger : Sjanger.values()){
             System.out.println(sjanger.ordinal() + "." + sjanger);
         }
 
-        int sjangerValg = scanner.nextInt();
-        Sjanger sjanger = Sjanger.values()[sjangerValg];
+        Sjanger sjanger = null;
+        while (sjanger == null){
+
+            String sjangerInput = scanner.nextLine().toUpperCase();
+            for (Sjanger s : Sjanger.values()){
+                if (s.name().equals(sjangerInput)){
+                    sjanger = s;
+                    break;
+                }
+            }
+
+        }
+        
+
+
 
         System.out.println("Filmselskap: ");
         String filmSelskap = scanner.nextLine();

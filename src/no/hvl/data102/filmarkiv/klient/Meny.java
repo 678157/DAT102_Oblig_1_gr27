@@ -17,7 +17,7 @@ public class Meny {
 
     public void start(){
         Film film1 = new Film(1,"Produsent1","Star Wars",1980,Sjanger.ACTION,"Warner Bros");
-        Film film2 = new Film(2,"Produsent2","John Wick",2014,Sjanger.ACTION,"Warner Bros");
+        Film film2 = new Film(2,"Produsent1","John Wick",2014,Sjanger.ACTION,"Warner Bros");
         Film film3 = new Film(3,"Produsent3","Titanic",1999,Sjanger.ROMANCE,"Universal Pictures");
         Film film4 = new Film(4,"Produsent4","Spider-Man",2000,Sjanger.ACTION,"Warner Bros");
         Film film5 = new Film(5,"Produsent5","Batman",2000,Sjanger.ACTION,"DC Studios");
@@ -55,14 +55,16 @@ public class Meny {
 
                 case 3:
                 System.out.println("Skriv inn delstreng: ");
-                String delstreng = tekstgr.getScanner().next();
+                tekstgr.getScanner().nextLine();
+                String delstreng = tekstgr.getScanner().nextLine();
                 tekstgr.skrivUtFilmDelstrengTittel(filmarkiv, delstreng);
                 
                     break;
 
                 case 4:
                 System.out.println("Skriv inn produsent: ");
-                String produsent = tekstgr.getScanner().next();
+                tekstgr.getScanner().nextLine();
+                String produsent = tekstgr.getScanner().nextLine();
 
                 tekstgr.skrivUtFilmProdusent(filmarkiv,produsent);
 
