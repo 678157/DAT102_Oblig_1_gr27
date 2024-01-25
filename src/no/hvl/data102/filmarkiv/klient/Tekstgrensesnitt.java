@@ -20,6 +20,7 @@ public class Tekstgrensesnitt {
 
         System.out.println("Filmnummer: ");
         int filmNummer = scanner.nextInt();
+    
 
         System.out.println("Film produsent: ");
         String filmProdusent = scanner.nextLine();
@@ -52,13 +53,19 @@ public class Tekstgrensesnitt {
         System.out.println("Lanseringsår: " + film.getLanseringsAr());
         System.out.println("Sjanger: " + film.getSjanger());
         System.out.println("Filmselskap: " + film.getFilmSelskap());
+        System.out.println("\n");
         
     }
 
     public void skrivUtAlleFilmer(FilmarkivADT arkiv){
-        System.out.println("Alle Filmer i arkivet: ");
-        for (int i = 0; i < arkiv.antall();i++){
-            skrivUtFilm(arkiv.finnFilm(i));
+        System.out.println("Alle Filmer i arkivet: \n");
+        for (int i = 1; i <= arkiv.antall();i++){
+            Film film = arkiv.finnFilm(i);
+            if (film != null){
+                skrivUtFilm(film);
+            }else{
+                System.out.println("Kan ikke finne film på index '" + i + "'");
+            }
         }
     }
   
