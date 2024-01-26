@@ -4,6 +4,8 @@ public class LinearNode<T> {
 	    private T data;
 	    private LinearNode<T> neste;
 
+	    public LinearNode() {
+	    }
 	    public LinearNode(T data) {
 	        this.data = data;
 	        this.neste = null;

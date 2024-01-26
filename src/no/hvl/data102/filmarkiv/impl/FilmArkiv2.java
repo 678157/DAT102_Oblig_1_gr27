@@ -3,20 +3,20 @@ import java.util.Arrays;
 
 import no.hvl.data102.filmarkiv.adt.FilmarkivADT;
 
-public class Filmarkiv2 implements FilmarkivADT {
+public class FilmArkiv2 implements FilmarkivADT {
 	    private int antall;
 	    private LinearNode<Film> start;
 
 
-	    public Filmarkiv2() {
+	    public FilmArkiv2() {
 	        antall = 0;
-	        start = null;
+	        start = new LinearNode<>();
 	    }
 
 	    @Override
 	    public Film finnFilm(int nr) {
 	        LinearNode<Film> valgt = start;
-	        while (valgt != null) {
+	        while (valgt.getData() != null) {
 	            if (valgt.getData().getFilmNum() == nr) {
 	                return valgt.getData();
 	            }
@@ -40,12 +40,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 	    	LinearNode<Film> forrige = null;
 	    	
 	    	
-	    	if (finnFilm(filmnr) == null) {
-	            return false;
-	        }
-
-	        
-	        while (valgt != null) {
+	        while (valgt.getData() != null) {
 	        	if (valgt.getData().getFilmNum() == filmnr) {
 	        		if (forrige == null) {
 	        			start = valgt.getNeste();
@@ -53,9 +48,11 @@ public class Filmarkiv2 implements FilmarkivADT {
 	        		else {
 	        			forrige.setNeste(valgt.getNeste());
 	        		}
+	        		antall--;
+		        	return true;
 	        	}
-	        	antall--;
-	        	return true;
+	        	forrige = valgt;
+	        	valgt = valgt.getNeste();
 	        }
 	        return false;
 	    }
@@ -69,7 +66,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 
 	        int i = 0;
 
-	        while (valgt != null && i < resultater.length) {
+	        while (valgt.getData() != null && i < resultater.length) {
 	            if (valgt.getData().getTittel().toLowerCase().contains(delstreng.toLowerCase())) {
 	                resultater[i] = valgt.getData();
 	                i++;
@@ -88,7 +85,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 
 	        int i = 0;
 
-	        while (valgt != null && i < resultater.length) {
+	        while (valgt.getData() != null && i < resultater.length) {
 	            if (valgt.getData().getProdusent().toLowerCase().contains(delstreng.toLowerCase())) {
 	                resultater[i] = valgt.getData();
 	                i++;
@@ -101,7 +98,7 @@ public class Filmarkiv2 implements FilmarkivADT {
 
 	    @Override
 	    public int antall(Sjanger sjanger) {
-	        // TODO: Implementer telling av filmer med gitt sjanger
+	        // Implementer telling av filmer med gitt sjanger
 	      int antallsjanger = 0;
 	      LinearNode<Film> valgt = start;
 	      while(valgt.getData() != null) {

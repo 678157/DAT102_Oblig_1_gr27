@@ -1,34 +1,29 @@
 package no.hvl.data102.filmarkiv.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import no.hvl.data102.filmarkiv.adt.FilmarkivADT;
 import no.hvl.data102.filmarkiv.impl.Film;
-import no.hvl.data102.filmarkiv.impl.FilmArkiv;
+import no.hvl.data102.filmarkiv.impl.FilmArkiv2;
 import no.hvl.data102.filmarkiv.impl.Sjanger;
 
-public class FilmarkivTest {
+public class Filmarkiv2Test {
+	private FilmarkivADT filmarkiv = new FilmArkiv2();
+	private Film film1 = new Film(1,"Produsent1","Tittel1",2000,Sjanger.ACTION,"Filmselskap1");
+	private Film film2 = new Film(2,"Produsent2","Tittel2",2002,Sjanger.ROMANCE,"Filmselskap2");
+
 	
-	private FilmarkivADT filmarkiv;
-	private Film film1;
-	private Film film2;
-	
-	
-	@BeforeEach
-	public void setUp() {
-		filmarkiv = new FilmArkiv(5);
-		film1 = new Film(1,"Produsent1","Tittel1",2000,Sjanger.ACTION,"Filmselskap1");
-		film2 = new Film(2,"Produsent2","Tittel2",2002,Sjanger.ROMANCE,"Filmselskap2");
-		
-			
-		
-	}
+//	@BeforeEach
+//	public void setUp() {
+//		filmarkiv = new FilmArkiv2();
+//		film1 = new Film(1,"Produsent1","Tittel1",2000,Sjanger.ACTION,"Filmselskap1");
+//		film2 = new Film(2,"Produsent2","Tittel2",2002,Sjanger.ROMANCE,"Filmselskap2");
+//		
+//			
+//		
+//	}
 	
 	@Test
 	//Tester med å legge til 1 film.
@@ -42,7 +37,7 @@ public class FilmarkivTest {
 		filmarkiv.leggTilFilm(film1);
 		filmarkiv.leggTilFilm(film2);
 		
-		assertEquals(3,filmarkiv.antall(),"Skal være 3 filmer i listen");
+		assertEquals(2,filmarkiv.antall(),"Skal være 2 filmer i listen");
 	}
 	
 	@Test
@@ -64,7 +59,7 @@ public class FilmarkivTest {
 		
 		
 		assertTrue(filmarkiv.slettFilm(1), "Skal slette film med id 1");
-		assertEquals(2,	filmarkiv.antall(),"skal returnere at  det er 2 filmer igjen i listen.");
+		assertEquals(1,	filmarkiv.antall(),"skal returnere at  det er 1 filmer igjen i listen.");
 		assertNull(filmarkiv.finnFilm(1),"Film med id 1 skal ikke lengre eksistere");
 		
 	}
@@ -120,22 +115,4 @@ public class FilmarkivTest {
 		
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
